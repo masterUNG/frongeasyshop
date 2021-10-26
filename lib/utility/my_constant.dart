@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 class MyConstant {
   //field
   static String routAuthen = '/authen';
-  static String routCreateAccount = '/createaccount';
-  static String routServiceBuyer = '/servicebuyer';
-  static String routServiceShopper = '/serviceshopper';
+  static String routCreateAccount = '/createBccount';
+  static String routServiceBuyer = '/serviceBuyer';
+  static String routServiceShopper = '/serviceShopper';
+static String routForgotPassword = '/forgotPassword';
+static String routStockProduct = '/stockProduct';
+static String routEditShopProFile = '/editShopProFile';
+static String routStockProductCatigory = '/stockProductCatigoty';
+static String routStockAddStockProductCat = '/addStockProductCat';
 
   static Color primart = const Color(0xffa08a59);
   static Color dark = const Color(0xff705d2f);

@@ -1,32 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:frongeasyshop/utility/my_constant.dart';
-import 'package:frongeasyshop/widgets/show_signout.dart';
 import 'package:frongeasyshop/widgets/show_text.dart';
 
-class ServiceShopper extends StatefulWidget {
-  const ServiceShopper({Key? key}) : super(key: key);
+class StockProduct extends StatefulWidget {
+  const StockProduct({Key? key}) : super(key: key);
 
   @override
-  _ServiceShopperState createState() => _ServiceShopperState();
+  _StockProductState createState() => _StockProductState();
 }
 
-class _ServiceShopperState extends State<ServiceShopper> {
+class _StockProductState extends State<StockProduct> {
   List<String> titles = [
-    'แก้ไขข้อมูลร้านค้า',
-    'การสต๊อกสินค้า',
-    'การโปรโมชั่น',
-    'ประวัติรายการหน้าร้านค้า',
-    'สถานะสั่งซื่อ',
-    'ติดต่อลูกค้า',
+    'คลังสินค้า',
+    'สินค้าใกล้หมดอายุ',
+    'สินค้าขาดสต็อก',
+    'สินค้าขายดี',
   ];
 
   List<String> routeProduct = [
-    MyConstant.routEditShopProFile,
-    MyConstant.routStockProduct,
-    '',
-    '',
-    '',
-    '',
+    MyConstant.routStockProductCatigory,
     '',
     '',
   ];
@@ -35,8 +27,7 @@ class _ServiceShopperState extends State<ServiceShopper> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyConstant.primart,
-        title: const Text('ส่วนของร้านค้า'),
-        actions: [ShowSignOut()],
+        title: const Text('การสต๊อกสินค้า'),
       ),
       body: ListView.builder(
         itemCount: titles.length,

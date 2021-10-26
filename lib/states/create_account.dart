@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:frongeasyshop/models/user_mdel.dart';
 import 'package:frongeasyshop/utility/my_constant.dart';
 import 'package:frongeasyshop/utility/my_dialog.dart';
 import 'package:frongeasyshop/widgets/show_text.dart';
@@ -16,7 +19,6 @@ class _CreateAccountState extends State<CreateAccount> {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  
 
   Container buildCreateAccount() {
     return Container(
@@ -38,13 +40,42 @@ class _CreateAccountState extends State<CreateAccount> {
     );
   }
 
-  Future<void> processRegisterAndInsertUser() async {}
+  Future<void> processRegisterAndInsertUser() async {
+    String name = nameController.text;
+    String email = emailController.text;
+    String password = passwordController.text;
+    print([name, email, password, typeUser]);
+
+    await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((value) async {
+      print('## สมัครสำเร็จ');
+      String uid = value.user!.uid;
+      print('## uid ที่สมัครสำเร็จ = $uid');
+
+      UserModel model = UserModel(
+          email: email, name: name, password: password, typeuser: typeUser!);
+
+      await FirebaseFirestore.instance
+          .collection('user')
+          .doc(uid)
+          .set(model.toMap())
+          .then((value) => Navigator.pop(context));
+
+    }).catchError((value) {
+      String error = value.code;
+      String detail = value.message;
+      print('## error = $error, detail = $detail');
+      MyDialog().normalDialog(context, error, detail);
+    });
+  }
 
   Container buildName() {
     return Container(
       margin: EdgeInsets.only(top: 100),
       width: 250,
-      child: TextFormField(controller: nameController,
+      child: TextFormField(
+        controller: nameController,
         validator: (value) {
           if (value!.isEmpty) {
             return 'กรุณากรอก ผู้ใช้งาน?';
@@ -68,7 +99,8 @@ class _CreateAccountState extends State<CreateAccount> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 16),
       width: 250,
-      child: TextFormField(controller: emailController,
+      child: TextFormField(
+        controller: emailController,
         validator: (value) {
           if (value!.isEmpty) {
             return 'กรุณากรอก Email ผู้ใช้งาน?';
@@ -92,7 +124,8 @@ class _CreateAccountState extends State<CreateAccount> {
     return Container(
       margin: EdgeInsets.only(bottom: 16),
       width: 250,
-      child: TextFormField(controller: passwordController,
+      child: TextFormField(
+        controller: passwordController,
         validator: (value) {
           if (value!.isEmpty) {
             return 'กรุณากรอก รหัสผ่าน?';
