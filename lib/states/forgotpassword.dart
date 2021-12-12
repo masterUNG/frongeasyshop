@@ -1,3 +1,4 @@
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frongeasyshop/utility/my_constant.dart';
 
@@ -9,10 +10,14 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  //String email;
+ // final auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: MyConstant.primart,
+      appBar: AppBar(
+        backgroundColor: MyConstant.primart,
         title: const Text('ลืมรหัสผ่าน'),
       ),
     );

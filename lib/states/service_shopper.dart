@@ -14,21 +14,19 @@ class _ServiceShopperState extends State<ServiceShopper> {
   List<String> titles = [
     'แก้ไขข้อมูลร้านค้า',
     'การสต๊อกสินค้า',
-    'การโปรโมชั่น',
-    'ประวัติรายการหน้าร้านค้า',
-    'สถานะสั่งซื่อ',
+    'การจัดโปรโมชั่น',
+    'ประวัติรายการสั่งซื้อ',
+    'สถานะคำสั่งซื้อ',
     'ติดต่อลูกค้า',
   ];
 
   List<String> routeProduct = [
     MyConstant.routEditShopProFile,
     MyConstant.routStockProduct,
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
+    MyConstant.routStockPromotion,
+    MyConstant.routOrderHistory,
+    MyConstant.routOrderStatus,
+    MyConstant.routContactCustomer,
   ];
   @override
   Widget build(BuildContext context) {

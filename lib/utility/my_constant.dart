@@ -6,11 +6,15 @@ class MyConstant {
   static String routCreateAccount = '/createBccount';
   static String routServiceBuyer = '/serviceBuyer';
   static String routServiceShopper = '/serviceShopper';
-static String routForgotPassword = '/forgotPassword';
-static String routStockProduct = '/stockProduct';
-static String routEditShopProFile = '/editShopProFile';
-static String routStockProductCatigory = '/stockProductCatigoty';
-static String routStockAddStockProductCat = '/addStockProductCat';
+  static String routForgotPassword = '/forgotPassword';
+  static String routStockProduct = '/stockProduct';
+  static String routEditShopProFile = '/editShopProFile';
+  static String routStockProductCatigory = '/stockProductCatigoty';
+  static String routStockAddStockProductCat = '/addStockProductCat';
+  static String routStockPromotion = '/proMoTion';
+  static String routOrderHistory = '/orderHistory';
+  static String routOrderStatus = '/orderStatus';
+  static String routContactCustomer = '/contactCustomer';
 
   static Color primart = const Color(0xffa08a59);
   static Color dark = const Color(0xff705d2f);
@@ -22,7 +26,8 @@ static String routStockAddStockProductCat = '/addStockProductCat';
         color: light,
       );
   BoxDecoration gradianBox() => BoxDecoration(
-        gradient: RadialGradient(radius: 1.0,
+        gradient: RadialGradient(
+          radius: 1.0,
           colors: [Colors.white, light],
         ),
       );
