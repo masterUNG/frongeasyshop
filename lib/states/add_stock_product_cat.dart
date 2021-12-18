@@ -14,12 +14,13 @@ class AddStockProductCat extends StatefulWidget {
 class _AddStockProductCatState extends State<AddStockProductCat> {
   final formKey = GlobalKey<FormState>();
   TextEditingController groupControllor = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MyConstant.primart,
-        title: Text('เพิ่มกลุ่มของสินค้า'),
+        title: const Text('เพิ่มกลุ่มของสินค้า'),
       ),
       body: Center(
         child: Form(
@@ -77,7 +78,7 @@ class _AddStockProductCatState extends State<AddStockProductCat> {
 
   Container buildgroup() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 16),
+      margin: const EdgeInsets.symmetric(vertical: 16),
       width: 250,
       child: TextFormField(
         controller: groupControllor,
