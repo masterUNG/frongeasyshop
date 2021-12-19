@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:frongeasyshop/utility/my_constant.dart';
+import 'package:frongeasyshop/utility/my_dialog.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -10,8 +11,7 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  late String email;
-  final auth = FirebaseAuth.instance;
+  TextEditingController emailControiller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,27 +25,35 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: emailControiller,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   hintText: ('Email ผู้ใช้งาน'),
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    email = value;
-                  });
-                },
               ),
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-              RaisedButton(
-                child: Text('รีเซ็ตรหัสผ่าน'),
+            ElevatedButton(
                 onPressed: () {
-                  auth.sendPasswordResetEmail(email: email);
-                  Navigator.of(context).pop();
+                  if (emailControiller.text.isEmpty) {
+                    MyDialog().normalDialog(
+                        context, 'Empty Email', 'Please Fill Email');
+                  } else {
+                    processSentEmail();
+                  }
                 },
-              )
-            ])
+                child: const Text('Reset Password'))
           ],
         ));
+  }
+
+  Future<void> processSentEmail() async {
+    await FirebaseAuth.instance
+        .sendPasswordResetEmail(email: emailControiller.text)
+        .then((value) {
+      MyDialog().normalDialog(context, 'Success Sent Email',
+          'กรุณากลับไปที่ Email ตัวเองเพื่อ Reset Password');
+    }).catchError((value) {
+      MyDialog().normalDialog(context, value.code, value.message);
+    });
   }
 }

@@ -216,7 +216,27 @@ class _AddProductState extends State<AddProduct> {
             .collection('product')
             .doc()
             .set(model.toMap())
-            .then((value) => Navigator.pop(context));
+            .then((value) async {
+          await FirebaseFirestore.instance
+              .collection('user')
+              .doc(uidUserLogin)
+              .collection('profile')
+              .get()
+              .then((value) async {
+            for (var item in value.docs) {
+              var docIdProfile = item.id;
+              Map<String, dynamic> map = {};
+              map['product'] = true;
+              await FirebaseFirestore.instance
+                  .collection('user')
+                  .doc(uidUserLogin)
+                  .collection('profile')
+                  .doc(docIdProfile)
+                  .update(map)
+                  .then((value) => Navigator.pop(context));
+            }
+          });
+        });
       });
     });
   }
